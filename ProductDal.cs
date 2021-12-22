@@ -104,7 +104,7 @@ namespace AdoNetDemo
         public void Update(Product product) // Bana bir product ver ve ekleyeyim.
         {
             ConnectionControl(); // SqlConnection kontrol ediyor ve bağlantıyı açıyoruz.
-            SqlCommand command = new SqlCommand("Update Products set Name=@name,UnitPrice=@unitPrice,StockAmount=@StockAmount where Id=@id)", _connection); // SQL komutumuzu yazıyoruz.
+            SqlCommand command = new SqlCommand("Update Products set Name=@name, UnitPrice=@unitPrice, StockAmount=@stockAmount where ID=@id", _connection); // SQL komutumuzu yazıyoruz.
             command.Parameters.AddWithValue("@name", product.Name); // Parametreler olduğu için onları işliyoruz.
             command.Parameters.AddWithValue("@unitPrice", product.UnitPrice);
             command.Parameters.AddWithValue("@stockAmount", product.StockAmount);
@@ -114,5 +114,16 @@ namespace AdoNetDemo
 
         }
 
+        public void Delete(int id) // Bana bir product ver ve ekleyeyim.
+        {
+            ConnectionControl(); // SqlConnection kontrol ediyor ve bağlantıyı açıyoruz.
+            SqlCommand command = new SqlCommand("Delete from Products where Id=@id", _connection); // SQL komutumuzu yazıyoruz.
+            command.Parameters.AddWithValue("@id", id);
+            command.ExecuteNonQuery(); // Çalıştır.
+           
+            _connection.Close();
+           
+
+        }
     }
 }

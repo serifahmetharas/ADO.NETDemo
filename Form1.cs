@@ -102,14 +102,28 @@ namespace AdoNetDemo
         {
             Product product = new Product
             {
-                Id = Convert.ToInt32(dgwProducts.CurrentRow.Cells[0].Value),
+                Id = Convert.ToInt32(dgwProducts.CurrentRow.Cells[0].Value), // ID ulaşma kodu.
                 Name = tbxNameUpdate.Text,
                 UnitPrice= Convert.ToDecimal(tbxUnitPriceUpdate.Text),
                 StockAmount= Convert.ToInt32(tbxStockAmountUpdate.Text)
             };
 
             _productDal.Update(product);
+            LoadProducts();
             MessageBox.Show("Updated!");
+        }
+
+        private void dgwProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dgwProducts.CurrentRow.Cells[0].Value); // Id ye ulaşalım, silme işlemini ona göre yapalım.
+            _productDal.Delete(id);
+            LoadProducts();
+            MessageBox.Show("Deleted!");
         }
     }
 }
